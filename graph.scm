@@ -1,4 +1,4 @@
-;; -*- mode: scheme48; scheme48-package: graph  -*-
+;; -*- mode: scheme -*-
 
 (define-structure graph (export make-graph
 				 add-edge!
@@ -33,11 +33,6 @@
     (define (vertex->int v)
       (second (assoc v *internal-vertex-map*)))
 
-    ;; (define (add-edge! v1 v2 G)
-    ;;   (let* ((row (vertex->int v1))
-    ;; 	     (col (vertex->int v2)))
-    ;; 	(array-set! G row col 1)))
-
     (define (edge-ref v1 v2 G)
       (let* ((row (vertex->int v1))
 	     (col (vertex->int v2))
@@ -60,7 +55,7 @@
     (define (vertices-connected? v1 v2 G)
       (let ((row (vertex->int v1))
 	    (col (vertex->int v2)))
-	(if (array-ref G row col)
+	(if (> (array-ref G row col) 0)
 	    #t
 	    #f)))
 
@@ -87,4 +82,6 @@
 	    (array-set! *edge-weights* row col n)
 	    #f)))
 
-)) ;; Leave these here.
+)) 
+
+;; Graph.scm ends here.
